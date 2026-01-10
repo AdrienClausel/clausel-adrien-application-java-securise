@@ -4,10 +4,11 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
-import java.math.BigDecimal;
 import java.time.Instant;
 
+@NoArgsConstructor
 @Data
 @Entity
 @Table(name = "bidlist")
@@ -76,9 +77,9 @@ public class BidList {
     @Size(max=125)
     private String side;
 
-    public BidList(String account, String type, double bid) {
+    public BidList(String account, String type, double bidQuantity) {
         this.account = account;
         this.type = type;
-        this.bid = bid;
+        this.bidQuantity = bidQuantity;
     }
 }

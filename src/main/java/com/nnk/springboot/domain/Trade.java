@@ -1,16 +1,14 @@
 package com.nnk.springboot.domain;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
-import java.math.BigDecimal;
-import java.sql.Timestamp;
 import java.time.Instant;
 
-
+@NoArgsConstructor
 @Data
 @Entity
 @Table(name = "trade")
@@ -74,4 +72,9 @@ public class Trade {
 
     @Size(max=125)
     private String side;
+
+    public Trade(String account, String type) {
+        this.account = account;
+        this.type = type;
+    }
 }
