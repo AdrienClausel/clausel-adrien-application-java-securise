@@ -1,7 +1,7 @@
 package com.nnk.springboot.services;
 
 import com.nnk.springboot.domain.BidList;
-import com.nnk.springboot.dto.BidListDto;
+import com.nnk.springboot.dtos.BidListDto;
 import com.nnk.springboot.repositories.BidListRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,19 +15,18 @@ public class BidListService implements IBidListService {
     private BidListRepository bidListRepository;
 
     @Override
-    public void add(BidListDto bidListDto) {
-        var bidList = new BidList(bidListDto.account(), bidListDto.type(), bidListDto.bidQuantity());
+    public void add(BidList bidList) {
         bidListRepository.save(bidList);
     }
 
     @Override
-    public void update(BidListDto bidListDto, Integer id) {
+    public void update(BidList bidListUpdate, Integer id) {
         var optionnalBidList = bidListRepository.findById(id);
         if (optionnalBidList.isPresent()){
             var bidList = optionnalBidList.get();
-            bidList.setAccount(bidListDto.account());
-            bidList.setType(bidListDto.type());
-            bidList.setBidQuantity(bidListDto.bidQuantity());
+            bidList.setAccount(bidListUpdate.getAccount());
+            bidList.setType(bidListUpdate.getType());
+            bidList.setBidQuantity(bidList.getBidQuantity());
 
             bidListRepository.save(bidList);
         }

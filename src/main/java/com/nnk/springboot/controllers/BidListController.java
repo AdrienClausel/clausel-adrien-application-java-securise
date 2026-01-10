@@ -1,9 +1,7 @@
 package com.nnk.springboot.controllers;
 
-import com.nnk.springboot.domain.BidList;
-import com.nnk.springboot.dto.BidListDto;
-import com.nnk.springboot.repositories.BidListRepository;
-import com.nnk.springboot.services.BidListService;
+import com.nnk.springboot.dtos.BidListDto;
+import com.nnk.springboot.mappers.BidListMapper;
 import com.nnk.springboot.services.IBidListService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -24,7 +22,8 @@ public class BidListController {
     @RequestMapping("/bidList/list")
     public String home(Model model)
     {
-        model.addAttribute("bidLists",bidListService.getAll());
+        var bidListsDto = BidListMapper.toDtoList(bidListService.getAll());
+        model.addAttribute("bidListsDto",bidListsDto);
         return "bidList/list";
     }
 
@@ -42,14 +41,13 @@ public class BidListController {
             return "bidList/add";
         }
 
-        bidListService.add(bidListDto);
+        bidListService.add(BidListMapper.toEntity(bidListDto));
 
         return "redirect:/bidList/list";
     }
 
     @GetMapping("/bidList/update/{id}")
     public String showUpdateForm(@PathVariable("id") Integer id, Model model) {
-        // TODO: get Bid by Id and to model then show to the form
         try {
             var bidList = bidListService.getById(id);
             model.addAttribute("bidListDto", new BidListDto(id, bidList.getAccount(), bidList.getType(), bidList.getBidQuantity()));
@@ -63,19 +61,19 @@ public class BidListController {
     @PostMapping("/bidList/update/{id}")
     public String updateBid(@PathVariable("id") Integer id, @Valid BidListDto bidListDto,
                              BindingResult result, Model model) {
-        // TODO: check required fields, if valid call service to update Bid and return list Bid
         if (result.hasErrors()){
             return "bidList/add";
         }
 
-        bidListService.update(bidListDto,id);
+        var bidList = BidListMapper.toEntity(bidListDto);
+
+        bidListService.update(bidList,id);
 
         return "redirect:/bidList/list";
     }
 
     @GetMapping("/bidList/delete/{id}")
     public String deleteBid(@PathVariable("id") Integer id, Model model) {
-        // TODO: Find Bid by Id and delete the bid, return to Bid list
         bidListService.delete(id);
 
         return "redirect:/bidList/list";

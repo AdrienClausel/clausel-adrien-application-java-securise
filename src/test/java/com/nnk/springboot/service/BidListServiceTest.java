@@ -1,7 +1,7 @@
 package com.nnk.springboot.service;
 
 import com.nnk.springboot.domain.BidList;
-import com.nnk.springboot.dto.BidListDto;
+import com.nnk.springboot.dtos.BidListDto;
 import com.nnk.springboot.repositories.BidListRepository;
 import com.nnk.springboot.services.BidListService;
 import org.junit.jupiter.api.BeforeEach;
@@ -29,19 +29,19 @@ public class BidListServiceTest {
     private BidListRepository bidListRepository;
 
     private BidList bidList;
-    private BidListDto bidListDto;
+    private BidList bidListUpdate;
 
     @BeforeEach
     void setUp() {
         bidList = new BidList("compte1", "type1", 5.0);
         bidList.setBidListId(1);
 
-        bidListDto = new BidListDto(null,"compte2", "type2", 10.0);
+        bidListUpdate = new BidList("compte2", "type2", 10.0);
     }
 
     @Test
     void add_shouldSaveBidList() {
-        bidListService.add(bidListDto);
+        bidListService.add(bidList);
 
         ArgumentCaptor<BidList> argumentCaptor = ArgumentCaptor.forClass(BidList.class);
         verify(bidListRepository).save(argumentCaptor.capture());
@@ -57,19 +57,19 @@ public class BidListServiceTest {
     void update_shouldUpdateBidList_whenIdExists(){
         when(bidListRepository.findById(1)).thenReturn(Optional.of(bidList));
 
-        bidListService.update(bidListDto, 1);
+        bidListService.update(bidListUpdate, 1);
 
         verify(bidListRepository).save(bidList);
-        assertEquals(bidListDto.account(),bidList.getAccount());
-        assertEquals(bidListDto.type(),bidList.getType());
-        assertEquals(bidListDto.bidQuantity(),bidList.getBidQuantity());
+        assertEquals(bidListUpdate.getAccount(),bidList.getAccount());
+        assertEquals(bidListUpdate.getType(),bidList.getType());
+        assertEquals(bidListUpdate.getBidQuantity(),bidList.getBidQuantity());
     }
 
     @Test
     void update_shouldUpdateBidList_whenIdNotExists(){
         when(bidListRepository.findById(1)).thenReturn(Optional.empty());
 
-        bidListService.update(bidListDto, 1);
+        bidListService.update(bidListUpdate, 1);
 
         verify(bidListRepository,never()).save(any());
     }
