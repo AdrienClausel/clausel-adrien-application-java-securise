@@ -1,7 +1,6 @@
-package com.nnk.springboot.services;
+package com.nnk.springboot.services.bidList;
 
 import com.nnk.springboot.domain.BidList;
-import com.nnk.springboot.dtos.BidListDto;
 
 import java.util.List;
 

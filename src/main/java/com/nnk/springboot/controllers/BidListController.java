@@ -2,16 +2,13 @@ package com.nnk.springboot.controllers;
 
 import com.nnk.springboot.dtos.BidListDto;
 import com.nnk.springboot.mappers.BidListMapper;
-import com.nnk.springboot.services.IBidListService;
+import com.nnk.springboot.services.bidList.IBidListService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-
 import jakarta.validation.Valid;
-
-
 
 @Controller
 public class BidListController {
@@ -35,7 +32,6 @@ public class BidListController {
 
     @PostMapping("/bidList/validate")
     public String validate(@Valid @ModelAttribute("bidListDto") BidListDto bidListDto, BindingResult result, Model model) {
-        // TODO: check data valid and save to db, after saving return bid list
 
         if (result.hasErrors()){
             return "bidList/add";

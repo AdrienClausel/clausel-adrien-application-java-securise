@@ -1,9 +1,8 @@
 package com.nnk.springboot.service;
 
 import com.nnk.springboot.domain.BidList;
-import com.nnk.springboot.dtos.BidListDto;
 import com.nnk.springboot.repositories.BidListRepository;
-import com.nnk.springboot.services.BidListService;
+import com.nnk.springboot.services.bidList.BidListService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -40,21 +39,21 @@ public class BidListServiceTest {
     }
 
     @Test
-    void add_shouldSaveBidList() {
+    void add_shouldSave() {
         bidListService.add(bidList);
 
         ArgumentCaptor<BidList> argumentCaptor = ArgumentCaptor.forClass(BidList.class);
         verify(bidListRepository).save(argumentCaptor.capture());
 
         BidList newBidList = argumentCaptor.getValue();
-        assertEquals("compte2", newBidList.getAccount());
-        assertEquals("type2", newBidList.getType());
-        assertEquals(10, newBidList.getBidQuantity());
+        assertEquals("compte1", newBidList.getAccount());
+        assertEquals("type1", newBidList.getType());
+        assertEquals(5, newBidList.getBidQuantity());
 
     }
 
     @Test
-    void update_shouldUpdateBidList_whenIdExists(){
+    void update_shouldUpdate_whenIdExists(){
         when(bidListRepository.findById(1)).thenReturn(Optional.of(bidList));
 
         bidListService.update(bidListUpdate, 1);
@@ -66,7 +65,7 @@ public class BidListServiceTest {
     }
 
     @Test
-    void update_shouldUpdateBidList_whenIdNotExists(){
+    void update_shouldUpdate_whenIdNotExists(){
         when(bidListRepository.findById(1)).thenReturn(Optional.empty());
 
         bidListService.update(bidListUpdate, 1);
@@ -92,7 +91,7 @@ public class BidListServiceTest {
     }
 
     @Test
-    void getById_shouldReturnBidList_whenIdExists() {
+    void getById_shouldReturnList_whenIdExists() {
         when(bidListRepository.findById(1)).thenReturn(Optional.of(bidList));
 
         BidList result = bidListService.getById(1);
@@ -101,7 +100,7 @@ public class BidListServiceTest {
     }
 
     @Test
-    void getById_shouldReturnBidList_whenIdNotExists() {
+    void getById_shouldReturnList_whenIdNotExists() {
         when(bidListRepository.findById(1)).thenReturn(Optional.empty());
 
         assertThrows(IllegalArgumentException.class, () -> bidListService.getById(1));

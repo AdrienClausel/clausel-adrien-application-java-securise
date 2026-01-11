@@ -1,7 +1,6 @@
-package com.nnk.springboot.services;
+package com.nnk.springboot.services.bidList;
 
 import com.nnk.springboot.domain.BidList;
-import com.nnk.springboot.dtos.BidListDto;
 import com.nnk.springboot.repositories.BidListRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
