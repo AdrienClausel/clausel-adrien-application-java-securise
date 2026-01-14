@@ -27,7 +27,7 @@ public final class CurvePointMapper {
         );
     }
 
-    public static List<CurvePointDto> toDoList(List<CurvePoint> curvePoints){
+    public static List<CurvePointDto> toDtoList(List<CurvePoint> curvePoints){
         return curvePoints.stream()
                 .map(CurvePointMapper::toDto)
                 .collect(Collectors.toList());

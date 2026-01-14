@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import jakarta.validation.Valid;
 
 @Controller
-public class CurveController {
+public class CurvePointController {
 
     @Autowired
     private ICurvePointService curvePointService;
@@ -20,14 +20,13 @@ public class CurveController {
     @RequestMapping("/curvePoint/list")
     public String home(Model model)
     {
-        var curvePointsDto = CurvePointMapper.toDoList(curvePointService.getAll());
-        model.addAttribute("curvePointListDto", curvePointsDto);
+        var curvePointsDto = CurvePointMapper.toDtoList(curvePointService.getAll());
+        model.addAttribute("curvePointsDto", curvePointsDto);
         return "curvePoint/list";
     }
 
     @GetMapping("/curvePoint/add")
-    public String addCurvePointForm(Model model) {
-        model.addAttribute("curvePointDto", new CurvePointDto(0,null,0.0,0.0));
+    public String addCurvePointForm(@ModelAttribute("curvePointDto") CurvePointDto curvePointDto) {
         return "curvePoint/add";
     }
 
@@ -58,7 +57,7 @@ public class CurveController {
     public String updateCurvePoint(@PathVariable("id") Integer id, @Valid CurvePointDto curvePointDto,
                              BindingResult result, Model model) {
         if (result.hasErrors()){
-            return "curvePoint/add";
+            return "curvePoint/update";
         }
 
         var curvePoint = CurvePointMapper.toEntity(curvePointDto);
