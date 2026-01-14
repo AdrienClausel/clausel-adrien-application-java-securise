@@ -12,7 +12,7 @@ public final class BidListMapper {
 
     public static BidList toEntity(BidListDto dto) {
         BidList bidList = new BidList();
-        bidList.setBidListId(dto.bidListId());
+        bidList.setId(dto.id());
         bidList.setAccount(dto.account());
         bidList.setType(dto.type());
         return bidList;
@@ -20,7 +20,7 @@ public final class BidListMapper {
 
     public static BidListDto toDto(BidList bidList){
         return new BidListDto(
-                bidList.getBidListId(),
+                bidList.getId(),
                 bidList.getAccount(),
                 bidList.getType(),
                 bidList.getBidQuantity()
