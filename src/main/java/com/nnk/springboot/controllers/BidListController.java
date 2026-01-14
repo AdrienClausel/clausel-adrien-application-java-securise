@@ -10,6 +10,8 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import jakarta.validation.Valid;
 
+import java.util.List;
+
 @Controller
 public class BidListController {
 
@@ -25,13 +27,12 @@ public class BidListController {
     }
 
     @GetMapping("/bidList/add")
-    public String addBidForm(Model model) {
-        model.addAttribute("bidListDto",new BidListDto(0,"","",0));
+    public String addBidForm(@ModelAttribute("bidListDto") BidListDto bidListDto) {
         return "bidList/add";
     }
 
     @PostMapping("/bidList/validate")
-    public String validate(@Valid @ModelAttribute("bidListDto") BidListDto bidListDto, BindingResult result, Model model) {
+    public String validate(@Valid @ModelAttribute("bidListDto") BidListDto bidListDto, BindingResult result) {
 
         if (result.hasErrors()){
             return "bidList/add";
@@ -50,7 +51,7 @@ public class BidListController {
             return "bidList/update";
         } catch (IllegalArgumentException ex) {
             model.addAttribute("errorMsg", ex.getMessage());
-            return "redirect:403";
+            return "redirect:/403";
         }
     }
 
@@ -58,7 +59,7 @@ public class BidListController {
     public String updateBid(@PathVariable("id") Integer id, @Valid BidListDto bidListDto,
                              BindingResult result, Model model) {
         if (result.hasErrors()){
-            return "bidList/add";
+            return "bidList/update";
         }
 
         var bidList = BidListMapper.toEntity(bidListDto);

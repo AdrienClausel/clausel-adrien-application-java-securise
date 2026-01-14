@@ -33,7 +33,7 @@ public class BidListServiceTest {
     @BeforeEach
     void setUp() {
         bidList = new BidList("compte1", "type1", 5.0);
-        bidList.setBidListId(1);
+        bidList.setId(1);
 
         bidListUpdate = new BidList("compte2", "type2", 10.0);
     }

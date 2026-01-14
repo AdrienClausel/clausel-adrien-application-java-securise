@@ -25,7 +25,7 @@ public class BidListService implements IBidListService {
             var bidList = optionnalBidList.get();
             bidList.setAccount(bidListUpdate.getAccount());
             bidList.setType(bidListUpdate.getType());
-            bidList.setBidQuantity(bidList.getBidQuantity());
+            bidList.setBidQuantity(bidListUpdate.getBidQuantity());
 
             bidListRepository.save(bidList);
         }

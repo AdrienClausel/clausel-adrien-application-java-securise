@@ -4,7 +4,7 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 
 public record BidListDto(
-        Integer bidListId,
+        Integer id,
         @NotBlank(message =  "account is mandatory")
         @Size(max=30)
         String account,
