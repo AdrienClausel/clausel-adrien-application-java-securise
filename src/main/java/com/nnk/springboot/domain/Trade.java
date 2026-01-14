@@ -13,10 +13,10 @@ import java.time.Instant;
 @Entity
 @Table(name = "trade")
 public class Trade {
-    // TODO: Map columns in data table TRADE with corresponding java fields
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
-    private Integer tradeId;
+    @Column(name = "TradeId")
+    private Integer id;
 
     @NotBlank(message =  "account is mandatory")
     @Size(max=30)
