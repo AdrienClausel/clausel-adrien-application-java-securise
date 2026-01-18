@@ -11,7 +11,7 @@ public record BidListDto(
         @NotBlank(message =  "type is mandatory")
         @Size(max=30)
         String type,
-        double bidQuantity
+        Double bidQuantity
 ) {
 
 }

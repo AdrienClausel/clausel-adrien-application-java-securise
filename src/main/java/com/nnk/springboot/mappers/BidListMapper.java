@@ -30,7 +30,6 @@ public final class BidListMapper {
     public static List<BidListDto> toDtoList(List<BidList> bidLists){
         return bidLists.stream()
                 .map(BidListMapper::toDto)
-                .collect(Collectors.toList()
-        );
+                .collect(Collectors.toList());
     }
 }

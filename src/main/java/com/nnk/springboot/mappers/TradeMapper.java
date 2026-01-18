@@ -19,6 +19,7 @@ public final class TradeMapper {
 
     public static TradeDto toDto(Trade trade){
         return new TradeDto(
+                trade.getId(),
                 trade.getAccount(),
                 trade.getType(),
                 trade.getBuyQuantity()

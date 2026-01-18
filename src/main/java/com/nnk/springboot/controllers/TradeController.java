@@ -48,7 +48,7 @@ public class TradeController {
     public String showUpdateForm(@PathVariable("id") Integer id, Model model) {
         try {
             var trade = tradeService.getById(id);
-            model.addAttribute("tradeDto", new TradeDto(trade.getAccount(),trade.getType(),trade.getBuyQuantity()));
+            model.addAttribute("tradeDto", new TradeDto(trade.getId(), trade.getAccount(),trade.getType(),trade.getBuyQuantity()));
             return "trade/update";
         } catch (IllegalArgumentException ex) {
             model.addAttribute("errorMsg", ex.getMessage());
