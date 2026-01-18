@@ -10,12 +10,12 @@ import org.mockito.ArgumentCaptor;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import java.util.List;
 import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 import static org.mockito.Mockito.when;
@@ -34,10 +34,10 @@ public class UserServiceTest {
 
     @BeforeEach
     void setUp(){
-        user = new User("utilisateur1", "motdepasse1","nomprenom1");
+        user = new User("utilisateur1", "motdepasse1","nomprenom1", "Admin");
         user.setId(1);
 
-        userUpdate = new User("utilisateur2", "motdepasse2","nomprenom2");
+        userUpdate = new User("utilisateur2", "motdepasse2","nomprenom2", "Admin");
     }
 
     @Test
@@ -56,12 +56,13 @@ public class UserServiceTest {
     @Test
     void update_shouldUpdate_whenIdExists(){
         when(userRepository.findById(1)).thenReturn(Optional.of(user));
+        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 
         userService.update(userUpdate, 1);
 
         verify(userRepository).save(user);
         assertEquals(userUpdate.getUsername(), user.getUsername());
-        assertEquals(userUpdate.getPassword(), user.getPassword());
+        assertTrue(encoder.matches(userUpdate.getPassword(),user.getPassword()));
         assertEquals(userUpdate.getFullname(), user.getFullname());
     }
 
