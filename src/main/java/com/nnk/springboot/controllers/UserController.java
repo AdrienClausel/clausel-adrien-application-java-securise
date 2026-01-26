@@ -1,13 +1,9 @@
 package com.nnk.springboot.controllers;
 
-import com.nnk.springboot.domain.User;
 import com.nnk.springboot.dtos.UserDto;
 import com.nnk.springboot.mappers.UserMapper;
-import com.nnk.springboot.repositories.UserRepository;
 import com.nnk.springboot.services.user.IUserService;
-import com.nnk.springboot.services.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -20,9 +16,6 @@ public class UserController {
 
     @Autowired
     private IUserService userService;
-
-    @Autowired
-    private UserRepository userRepository;
 
     @RequestMapping("/user/list")
     public String home(Model model)

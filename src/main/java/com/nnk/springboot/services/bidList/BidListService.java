@@ -15,7 +15,8 @@ public class BidListService implements IBidListService {
 
     @Override
     public void add(BidList bidList) {
-        bidListRepository.save(bidList);
+        throw new IllegalArgumentException("error bidlist");
+        //bidListRepository.save(bidList);
     }
 
     @Override

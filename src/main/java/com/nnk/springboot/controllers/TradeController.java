@@ -1,6 +1,5 @@
 package com.nnk.springboot.controllers;
 
-import com.nnk.springboot.domain.Trade;
 import com.nnk.springboot.dtos.TradeDto;
 import com.nnk.springboot.mappers.TradeMapper;
 import com.nnk.springboot.services.trade.TradeService;
@@ -46,14 +45,9 @@ public class TradeController {
 
     @GetMapping("/trade/update/{id}")
     public String showUpdateForm(@PathVariable("id") Integer id, Model model) {
-        try {
-            var trade = tradeService.getById(id);
-            model.addAttribute("tradeDto", new TradeDto(trade.getId(), trade.getAccount(),trade.getType(),trade.getBuyQuantity()));
-            return "trade/update";
-        } catch (IllegalArgumentException ex) {
-            model.addAttribute("errorMsg", ex.getMessage());
-            return "redirect:403";
-        }
+        var trade = tradeService.getById(id);
+        model.addAttribute("tradeDto", new TradeDto(trade.getId(), trade.getAccount(),trade.getType(),trade.getBuyQuantity()));
+        return "trade/update";
     }
 
     @PostMapping("/trade/update/{id}")

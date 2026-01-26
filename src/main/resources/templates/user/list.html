@@ -13,7 +13,7 @@
 
 		</div>
 		<div class="col-6 text-right">
-			<a href="/">Home</a>&nbsp;|&nbsp;<a href="/login">Login</a>
+			<a href="/">Home</a>&nbsp;|&nbsp;<a href="/app/login">Login</a>
 		</div>
 	</div>
 	<div class="row"><h2>User List</h2></div>
@@ -30,7 +30,7 @@
 				</tr>
 			</thead>
 			<tbody>
-				<tr th:each="user : ${users}">
+				<tr th:each="user : ${usersDto}">
 					<td style="width: 10%" th:text="${user.id}"></td>
 					<td th:text="${user.fullname}"></td>
 					<td th:text="${user.username}"></td>

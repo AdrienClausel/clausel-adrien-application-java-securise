@@ -1,6 +1,5 @@
 package com.nnk.springboot.controllers;
 
-import com.nnk.springboot.domain.Rating;
 import com.nnk.springboot.dtos.RatingDto;
 import com.nnk.springboot.mappers.RatingMapper;
 import com.nnk.springboot.services.rating.IRatingService;
@@ -45,14 +44,9 @@ public class RatingController {
 
     @GetMapping("/rating/update/{id}")
     public String showUpdateForm(@PathVariable("id") Integer id, Model model) {
-        try {
-            var rating = ratingService.getById(id);
-            model.addAttribute("ratingDto", new RatingDto(id,rating.getMoodysRating(),rating.getSandPRating(),rating.getFitchRating(),rating.getOrderNumber()));
-            return "rating/update";
-        } catch (IllegalArgumentException ex) {
-            model.addAttribute("errorMsg", ex.getMessage());
-            return "redirect:403";
-        }
+        var rating = ratingService.getById(id);
+        model.addAttribute("ratingDto", new RatingDto(id,rating.getMoodysRating(),rating.getSandPRating(),rating.getFitchRating(),rating.getOrderNumber()));
+        return "rating/update";
     }
 
     @PostMapping("/rating/update/{id}")

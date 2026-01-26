@@ -1,6 +1,5 @@
 package com.nnk.springboot.controllers;
 
-import com.nnk.springboot.domain.RuleName;
 import com.nnk.springboot.dtos.RuleNameDto;
 import com.nnk.springboot.mappers.RuleNameMapper;
 import com.nnk.springboot.services.ruleName.IRuleNameService;
@@ -46,14 +45,9 @@ public class RuleNameController {
 
     @GetMapping("/ruleName/update/{id}")
     public String showUpdateForm(@PathVariable("id") Integer id, Model model) {
-        try {
-            var ruleName = ruleNameService.getById(id);
-            model.addAttribute("ruleNameDto", new RuleNameDto(ruleName.getId(), ruleName.getName(),ruleName.getDescription(), ruleName.getJson(), ruleName.getTemplate(), ruleName.getSqlStr(), ruleName.getSqlPart()));
-            return "ruleName/update";
-        } catch (IllegalArgumentException ex) {
-            model.addAttribute("errorMsg", ex.getMessage());
-            return "redirect:403";
-        }
+        var ruleName = ruleNameService.getById(id);
+        model.addAttribute("ruleNameDto", new RuleNameDto(ruleName.getId(), ruleName.getName(),ruleName.getDescription(), ruleName.getJson(), ruleName.getTemplate(), ruleName.getSqlStr(), ruleName.getSqlPart()));
+        return "ruleName/update";
     }
 
     @PostMapping("/ruleName/update/{id}")

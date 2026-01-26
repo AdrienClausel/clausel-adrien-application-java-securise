@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <title>Page not found</title>
+    <link rel="stylesheet" type="text/css" href="../../css/bootstrap.min.css">
+</head>
+<body>
+<div class="container">
+    <h3>Page not found</h3>
+    <div>
+        Logged in user: <b th:inline="text"  class="user" sec:authentication="name"></b>
+        <form th:action="@{/bidList/list}" method="get">
+            <input type="submit" value="Home"/>
+        </form>
+    </div>
+</div>
+</body>
+</html>

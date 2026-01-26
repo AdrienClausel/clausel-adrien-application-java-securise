@@ -10,8 +10,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import jakarta.validation.Valid;
 
-import java.util.List;
-
 @Controller
 public class BidListController {
 
@@ -45,14 +43,9 @@ public class BidListController {
 
     @GetMapping("/bidList/update/{id}")
     public String showUpdateForm(@PathVariable("id") Integer id, Model model) {
-        try {
-            var bidList = bidListService.getById(id);
-            model.addAttribute("bidListDto", new BidListDto(id, bidList.getAccount(), bidList.getType(), bidList.getBidQuantity()));
-            return "bidList/update";
-        } catch (IllegalArgumentException ex) {
-            model.addAttribute("errorMsg", ex.getMessage());
-            return "redirect:/403";
-        }
+        var bidList = bidListService.getById(id);
+        model.addAttribute("bidListDto", new BidListDto(id, bidList.getAccount(), bidList.getType(), bidList.getBidQuantity()));
+        return "bidList/update";
     }
 
     @PostMapping("/bidList/update/{id}")

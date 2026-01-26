@@ -43,14 +43,9 @@ public class CurvePointController {
 
     @GetMapping("/curvePoint/update/{id}")
     public String showUpdateForm(@PathVariable("id") Integer id, Model model) {
-        try {
-            var curvePoint = curvePointService.getById(id);
-            model.addAttribute("curvePointDto", new CurvePointDto(id, curvePoint.getCurveId(), curvePoint.getTerm(), curvePoint.getValue()));
-            return "curvePoint/update";
-        } catch (IllegalArgumentException ex) {
-            model.addAttribute("errorMsg", ex.getMessage());
-            return "redirect:403";
-        }
+        var curvePoint = curvePointService.getById(id);
+        model.addAttribute("curvePointDto", new CurvePointDto(id, curvePoint.getCurveId(), curvePoint.getTerm(), curvePoint.getValue()));
+        return "curvePoint/update";
     }
 
     @PostMapping("/curvePoint/update/{id}")
