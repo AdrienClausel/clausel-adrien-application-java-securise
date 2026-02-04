@@ -2,6 +2,7 @@ package com.nnk.springboot.controller;
 
 import com.nnk.springboot.controllers.UserController;
 import com.nnk.springboot.domain.User;
+import com.nnk.springboot.repositories.UserRepository;
 import com.nnk.springboot.services.user.IUserService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +28,9 @@ class UserControllerTest {
     @MockBean
     private IUserService userService;
 
+    @MockBean
+    private UserRepository userRepository;
+
     @Test
     void home_shouldReturnUserListView() throws Exception {
         when(userService.getAll()).thenReturn(List.of());
@@ -48,10 +52,12 @@ class UserControllerTest {
 
     @Test
     void validate_shouldRedirect_whenNoErrors() throws Exception {
+        when(userRepository.existsByUsername("adrien")).thenReturn(false);
+
         mockMvc.perform(MockMvcRequestBuilders.post("/user/validate")
                         .with(csrf())
-                        .param("fullname", "John Doe")
-                        .param("username", "jdoe")
+                        .param("fullname", "Adrien")
+                        .param("username", "adrien")
                         .param("password", "Password123!")
                         .param("role", "USER"))
                 .andExpect(status().is3xxRedirection())
