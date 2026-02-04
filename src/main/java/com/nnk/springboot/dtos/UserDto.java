@@ -1,8 +1,10 @@
 package com.nnk.springboot.dtos;
 
+import com.nnk.springboot.annotations.UniqueUsernameAnnotation;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
 
+@UniqueUsernameAnnotation
 public record UserDto(
       Integer id,
       @NotBlank(message = "fullname is mandatory")
