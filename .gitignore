@@ -1,0 +1,46 @@
+# Default ignored files
+/shelf/
+/workspace.xml
+
+# ========================
+# Maven / Build
+# ========================
+/target/
+/pom.xml.tag
+/pom.xml.releaseBackup
+/pom.xml.versionsBackup
+/logs/
+!.mvn/wrapper/maven-wrapper.jar
+
+# ========================
+# IntelliJ IDEA
+# ========================
+*.iml
+*.iws
+*.ipr
+/.idea/
+/out/
+
+# ========================
+# Spring Boot / Java
+# ========================
+*.class
+*.jar
+*.war
+*.ear
+*.log
+
+# ========================
+# Temporary files
+# ========================
+*.tmp
+*.swp
+*.bak
+*.orig
+
+# ========================
+# OS Files
+# ========================
+.DS_Store
+Thumbs.db
+
