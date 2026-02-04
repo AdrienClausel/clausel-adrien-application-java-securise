@@ -15,6 +15,7 @@ public final class BidListMapper {
         bidList.setId(dto.id());
         bidList.setAccount(dto.account());
         bidList.setType(dto.type());
+        bidList.setBidQuantity(dto.bidQuantity());
         return bidList;
     }
 
